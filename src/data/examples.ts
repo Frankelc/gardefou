@@ -8,21 +8,20 @@ export type Example = {
 export const EXAMPLES: Example[] = [
   {
     id: 'normal',
-    label: 'Cas normal — faux message de petit-fils',
-    description: 'Un exemple fictif où l’arnaque est claire une fois décortiquée.',
-    text: "Grand-maman c'est moi, j'ai eu un accident de voiture et je suis bloqué, j'ai besoin que tu m'envoies 500$ par Western Union tout de suite, mon téléphone est cassé c'est pour ça que ce numéro est différent. S'il te plaît ne dis rien à maman, elle va paniquer, je t'expliquerai tout après.",
+    label: 'Normal case — fake grandson message',
+    description: 'A fictional example where the scam is obvious once broken down.',
+    text: "Grandma it's me, I got into a car accident and I'm stuck, I need you to send me $500 through Western Union right away, my phone is broken that's why this number is different. Please don't tell mom, she'll panic, I'll explain everything later.",
   },
   {
-    id: 'confus',
-    label: 'Cas confus — alerte bancaire légitime',
-    description:
-      'Un exemple fictif plus ambigu : urgent, mais pas forcément une arnaque.',
-    text: "Alerte sécurité : une connexion inhabituelle a été détectée sur votre compte. Si ce n'était pas vous, veuillez vérifier votre compte dès que possible depuis le site officiel de votre banque ou l'application mobile.",
+    id: 'confusing',
+    label: 'Confusing case — legitimate bank alert',
+    description: 'A trickier fictional example: urgent, but not necessarily a scam.',
+    text: "Security alert: an unusual sign-in was detected on your account. If this wasn't you, please check your account as soon as possible from your bank's official website or mobile app.",
   },
   {
-    id: 'echec',
-    label: "Cas d'échec — rien à analyser",
-    description: 'Un champ vide, pour vérifier que le filet de sécurité reste affiché.',
+    id: 'failure',
+    label: "Failure case — nothing to analyze",
+    description: 'An empty field, to check that the safety net still shows up.',
     text: '',
   },
 ]

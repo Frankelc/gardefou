@@ -32,19 +32,19 @@ function App() {
 
         <section className="rise-in" style={{ animationDelay: '0.08s' }}>
           <h1 className="font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-            Comprends le risque,{' '}
-            <span style={{ color: 'var(--pine)' }}>avant d'agir.</span>
+            Understand the risk,{' '}
+            <span style={{ color: 'var(--pine)' }}>before you act.</span>
           </h1>
           <p className="mt-3 max-w-md text-xl leading-snug" style={{ color: 'var(--ink-soft)' }}>
-            Colle un message suspect. On t'explique calmement ce qui est
-            inhabituel, signal par signal.
+            Paste a suspicious message. We'll calmly explain what's unusual,
+            signal by signal.
           </p>
         </section>
 
         <section className="card rise-in flex flex-col gap-4 p-6" style={{ animationDelay: '0.16s' }}>
           <label htmlFor="message" className="flex items-center gap-2 text-lg font-semibold">
             <MessageIcon className="h-5 w-5" style={{ color: 'var(--pine)' }} />
-            Message reçu (SMS, courriel, texto)
+            Message received (SMS, email, text)
           </label>
           <textarea
             id="message"
@@ -54,7 +54,7 @@ function App() {
               setSubmitted(false)
             }}
             rows={6}
-            placeholder="Colle ici le message que tu as reçu..."
+            placeholder="Paste the message you received..."
             className="rounded-2xl border p-4 text-lg outline-none transition-colors"
             style={{
               background: 'var(--paper)',
@@ -85,7 +85,7 @@ function App() {
             onClick={() => setSubmitted(true)}
             className="btn-primary self-start px-7 py-3 text-lg font-semibold"
           >
-            Analyser
+            Analyze
           </button>
         </section>
 
@@ -94,12 +94,12 @@ function App() {
             <ResultPanel analysis={analysis} />
           ) : submitted && !hasText ? (
             <p className="rise-in text-lg" style={{ color: 'var(--ink-soft)' }}>
-              Il n'y a rien à analyser. La règle de sécurité ci-dessous reste
-              valable dans tous les cas.
+              There's nothing to analyze. The safety rule below still
+              applies either way.
             </p>
           ) : (
             <p className="text-lg" style={{ color: 'var(--ink-soft)' }}>
-              Colle un message, ou essaie un exemple, puis clique sur « Analyser ».
+              Paste a message, or try an example, then click "Analyze."
             </p>
           )}
         </section>
@@ -111,13 +111,13 @@ function App() {
           style={{ borderColor: 'var(--paper-line)', color: 'var(--ink-soft)' }}
         >
           <p>
-            GardeFou est un prototype. L'analyse se fait entièrement dans ton
-            navigateur — aucun message n'est envoyé à un serveur. Les
-            exemples utilisés ici sont fictifs. Cet outil repère des signaux
-            connus d'arnaques courantes ; il ne détecte pas tout (par
-            exemple, pas les appels vocaux ou deepfakes audio) et son score
-            est indicatif, pas une garantie. Il ne remplace pas le jugement
-            d'une personne de confiance ni les services d'urgence.
+            GardeFou is a prototype. The analysis runs entirely in your
+            browser — no message is ever sent to a server. The examples
+            used here are fictional. This tool spots signals common to
+            well-known scams; it doesn't catch everything (for example, not
+            voice calls or audio deepfakes), and its score is indicative,
+            not a guarantee. It does not replace the judgment of a trusted
+            person or emergency services.
           </p>
         </footer>
       </div>

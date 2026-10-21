@@ -6,7 +6,7 @@ export type Signal = {
   match: string
 }
 
-export type RiskLevel = 'faible' | 'moyen' | 'eleve'
+export type RiskLevel = 'low' | 'medium' | 'high'
 
 export type Analysis = {
   signals: Signal[]
@@ -24,66 +24,64 @@ type Rule = {
 
 const RULES: Rule[] = [
   {
-    id: 'urgence',
-    label: 'Urgence artificielle',
+    id: 'urgency',
+    label: 'Artificial urgency',
     explanation:
-      "Les arnaques créent une pression de temps pour empêcher de réfléchir ou de vérifier.",
+      'Scams create time pressure to stop you from thinking it through or checking.',
     weight: 20,
     pattern:
-      /\b(vite|urgent(e)?|imm[ée]diatement|tout de suite|d[ée]p[ée]che|rapidement|sans attendre|dernière chance|avant qu'il ne soit trop tard)\b/i,
+      /\b(hurry|urgent(ly)?|immediately|right away|quickly|don't wait|before it's too late|last chance)\b/i,
   },
   {
-    id: 'argent',
-    label: "Demande d'argent ou de transfert",
+    id: 'money',
+    label: 'Request for money or a transfer',
     explanation:
-      'Un message qui demande rapidement de l’argent, un virement ou une carte cadeau est un signal classique d’arnaque.',
+      'A message that quickly asks for money, a wire transfer, or a gift card is a classic scam signal.',
     weight: 30,
     pattern:
-      /\b(western union|virement|mandat|carte(s)?[- ]cadeau|crypto|bitcoin|envoie[- ]?moi|paye[rz]?|transf[èe]re?|transfert)\b/i,
+      /\b(western union|wire transfer|money order|gift cards?|crypto|bitcoin|send me|pay (me|now)|transfer)\b/i,
   },
   {
     id: 'code',
-    label: "Demande de code, mot de passe ou numéro de carte",
+    label: 'Request for a code, password, or card number',
     explanation:
-      'Aucune institution légitime ne demande un code de vérification, un NIP ou un mot de passe par SMS ou téléphone.',
+      'No legitimate institution asks for a verification code, PIN, or password by text or phone call.',
     weight: 30,
     pattern:
-      /\b(code de v[ée]rification|otp|mot de passe|nip|code secret|num[ée]ro de carte|cvv|code d'acc[èe]s)\b/i,
+      /\b(verification code|otp|password|pin|security code|card number|cvv|access code)\b/i,
   },
   {
-    id: 'identite',
-    label: "Usurpation d'identité (proche ou autorité)",
+    id: 'identity',
+    label: 'Impersonation (a relative or an authority)',
     explanation:
-      "Se faire passer pour un proche en détresse ou une autorité (banque, police, support technique) est une technique courante pour gagner la confiance.",
+      'Posing as a relative in distress or an authority (bank, police, tech support) is a common way to earn trust.',
     weight: 15,
     pattern:
-      /\b(c'est moi|grand-maman|grand-papa|petit-fils|petite-fille|ton fils|ta fille|support technique|service technique|police|imp[ôo]ts|revenu qu[ée]bec|banque)\b/i,
+      /\b(it's me|grandma|grandpa|your grandson|your granddaughter|your son|your daughter|tech support|customer support|police|irs|tax office|bank)\b/i,
   },
   {
-    id: 'isolement',
-    label: "Pression d'isolement",
+    id: 'isolation',
+    label: 'Isolation pressure',
     explanation:
-      'Demander de garder le message secret ou de ne pas en parler à un proche sert à empêcher toute vérification.',
+      "Asking to keep the message secret or not mention it to anyone is meant to stop you from checking it.",
     weight: 20,
-    pattern:
-      /\b(ne (le )?dis à personne|garde ça secret|ne pr[ée]viens pas|entre nous|ne dis rien à)\b/i,
+    pattern: /\b(don't tell (anyone|anybody)|keep this (a )?secret|don't mention this|just between us)\b/i,
   },
   {
-    id: 'canal',
-    label: 'Canal de contact inhabituel',
+    id: 'channel',
+    label: 'Unusual contact channel',
     explanation:
-      "Un nouveau numéro ou une excuse pour ne pas parler de vive voix peut indiquer que la personne n'est pas qui elle prétend être.",
+      "A new number or an excuse not to talk directly can mean the person isn't who they claim to be.",
     weight: 10,
-    pattern:
-      /\b(nouveau num[ée]ro|mon t[ée]l[ée]phone est cass[ée]|je ne peux pas parler|j'ai perdu mon t[ée]l[ée]phone)\b/i,
+    pattern: /\b(new number|my phone (is )?broke|i can't talk right now|lost my phone)\b/i,
   },
   {
-    id: 'lien',
-    label: 'Lien à cliquer',
+    id: 'link',
+    label: 'A link to click',
     explanation:
-      "Un lien demandant de confirmer un compte ou une identité peut mener vers un site frauduleux imitant un site officiel.",
+      'A link asking you to confirm an account or an identity can lead to a fake site imitating an official one.',
     weight: 15,
-    pattern: /https?:\/\/\S+|\b(clique[rz]?|v[ée]rifie[rz]? ton compte|confirme[rz]? ton identit[ée])\b/i,
+    pattern: /https?:\/\/\S+|\b(click (here|this link)|verify your account|confirm your identity)\b/i,
   },
 ]
 
@@ -109,9 +107,9 @@ export function analyse(text: string): Analysis {
   const rawScore = signals.reduce((sum, s) => sum + s.weight, 0)
   const score = Math.min(100, rawScore)
 
-  let level: RiskLevel = 'faible'
-  if (score >= 55) level = 'eleve'
-  else if (score >= 25) level = 'moyen'
+  let level: RiskLevel = 'low'
+  if (score >= 55) level = 'high'
+  else if (score >= 25) level = 'medium'
 
   return { signals, score, level }
 }

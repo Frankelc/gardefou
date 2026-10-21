@@ -6,26 +6,26 @@ const LEVEL_STYLE: Record<
   Analysis['level'],
   { title: string; action: string; color: string; soft: string; Icon: typeof ShieldCheck }
 > = {
-  eleve: {
-    title: 'Danger probable',
+  high: {
+    title: 'Likely danger',
     action:
-      "Ne réponds pas et ne transfère rien. Appelle la personne directement au numéro que tu as déjà enregistré — pas celui écrit dans le message.",
+      "Don't reply and don't send anything. Call the person directly at a number you already have saved — not the one written in the message.",
     color: 'var(--clay)',
     soft: 'var(--clay-soft)',
     Icon: ShieldAlert,
   },
-  moyen: {
-    title: 'Signaux à vérifier',
+  medium: {
+    title: 'Signals worth checking',
     action:
-      "Ne te presse pas. Vérifie par un canal officiel (site connu, numéro déjà enregistré) avant d'agir.",
+      "Don't rush. Verify through an official channel (a known website, a number you already have) before acting.",
     color: 'var(--gold)',
     soft: 'var(--gold-soft)',
     Icon: ShieldAlert,
   },
-  faible: {
-    title: 'Rien de flagrant détecté',
+  low: {
+    title: 'Nothing alarming found',
     action:
-      "Aucun signal fort trouvé, mais reste prudent avec toute demande d'argent ou d'information personnelle.",
+      'No strong signal found, but stay cautious with any request for money or personal information.',
     color: 'var(--moss)',
     soft: 'var(--moss-soft)',
     Icon: ShieldCheck,
@@ -35,7 +35,7 @@ const LEVEL_STYLE: Record<
 export function ResultPanel({ analysis }: { analysis: Analysis }) {
   const [dismissed, setDismissed] = useState(false)
   const style = LEVEL_STYLE[analysis.level]
-  const canDismiss = analysis.level !== 'faible'
+  const canDismiss = analysis.level !== 'low'
   const Icon = style.Icon
 
   return (
@@ -56,7 +56,7 @@ export function ResultPanel({ analysis }: { analysis: Analysis }) {
               <Icon className="h-6 w-6" />
             </div>
             <p className="font-display text-xl font-semibold" style={{ color: dismissed ? 'var(--ink-soft)' : style.color }}>
-              {dismissed ? 'Marqué comme vérifié par toi' : style.title}
+              {dismissed ? 'Marked as reviewed by you' : style.title}
             </p>
           </div>
           <span
@@ -68,7 +68,7 @@ export function ResultPanel({ analysis }: { analysis: Analysis }) {
         </div>
         <p className="mt-4 text-lg leading-snug" style={{ color: 'var(--ink)' }}>
           {dismissed
-            ? "D'accord — tu connais la situation. Les signaux repérés restent listés plus bas, au cas où."
+            ? "Got it — you know the situation. The signals we found are still listed below, just in case."
             : style.action}
         </p>
         {canDismiss && (
@@ -77,7 +77,7 @@ export function ResultPanel({ analysis }: { analysis: Analysis }) {
             onClick={() => setDismissed((d) => !d)}
             className="pill mt-4 px-4 py-2 text-base font-medium"
           >
-            {dismissed ? "Rétablir l'alerte" : "Ce n'est pas un piège, je connais cette situation"}
+            {dismissed ? 'Restore the alert' : "This isn't a trap, I know this situation"}
           </button>
         )}
       </div>
@@ -85,7 +85,7 @@ export function ResultPanel({ analysis }: { analysis: Analysis }) {
       {analysis.signals.length > 0 ? (
         <div className="card p-6">
           <p className="font-display text-lg font-semibold" style={{ color: 'var(--ink)' }}>
-            Signaux détectés
+            Signals detected
           </p>
           <ul className="mt-4 flex flex-col gap-4">
             {analysis.signals.map((signal) => (
@@ -113,7 +113,7 @@ export function ResultPanel({ analysis }: { analysis: Analysis }) {
         </div>
       ) : (
         <p className="text-lg" style={{ color: 'var(--ink-soft)' }}>
-          Aucun des signaux connus de ce prototype n'a été trouvé dans ce texte.
+          None of this prototype's known signals were found in this text.
         </p>
       )}
     </div>

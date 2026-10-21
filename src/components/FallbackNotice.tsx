@@ -14,13 +14,13 @@ export function FallbackNotice() {
       </div>
       <div>
         <p className="font-display text-lg font-semibold" style={{ color: 'var(--pine)' }}>
-          La règle qui marche toujours
+          The rule that always works
         </p>
         <p className="mt-1 text-lg leading-snug" style={{ color: 'var(--ink)' }}>
-          Que l'outil fonctionne ou non : ne donne jamais d'argent, de code ou
-          de mot de passe par téléphone ou SMS. Vérifie toujours en appelant
-          la personne ou l'organisation à un numéro que tu connais déjà —
-          jamais celui écrit dans le message.
+          Whether the tool works or not: never give money, a code, or a
+          password over the phone or by text. Always verify by calling the
+          person or organization at a number you already know — never the
+          one written in the message.
         </p>
       </div>
     </div>
